@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj": {}
+    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj": {}
   },
   "projects": {
-    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj": {
+    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj",
+        "projectUniqueName": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj",
         "projectName": "InvoiceTracker.API",
-        "projectPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj",
+        "projectPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj",
         "packagesPath": "C:\\Users\\Syed Hussain Raza\\.nuget\\packages\\",
-        "outputPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\obj\\",
+        "outputPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +53,22 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[10.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.7, )"
             }
           },
           "imports": [
