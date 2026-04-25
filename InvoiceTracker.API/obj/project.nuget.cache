@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "6IMg9eMJva4=",
+  "success": true,
+  "projectFilePath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Syed Hussain Raza\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.3\\microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "C:\\Users\\Syed Hussain Raza\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
