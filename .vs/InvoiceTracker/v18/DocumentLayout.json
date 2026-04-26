@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Personal\\InvoiceTracker\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\personal\\invoicetracker\\invoicetracker.api\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\personal\\invoicetracker\\invoicetracker.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,6 +35,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClientsController.cs",
+              "DocumentMoniker": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\ClientsController.cs",
+              "RelativeDocumentMoniker": "InvoiceTracker.API\\Controllers\\ClientsController.cs",
+              "ToolTip": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\ClientsController.cs",
+              "RelativeToolTip": "InvoiceTracker.API\\Controllers\\ClientsController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAA+wBkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T08:53:10.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\Program.cs",
+              "RelativeDocumentMoniker": "InvoiceTracker.API\\Program.cs",
+              "ToolTip": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\Program.cs",
+              "RelativeToolTip": "InvoiceTracker.API\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T08:12:33.474Z",
+              "EditorCaption": ""
             }
           ]
         }

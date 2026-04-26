@@ -1,5 +1,6 @@
 ﻿using InvoiceTracker.API.Data;
 using InvoiceTracker.API.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,7 @@ public class ClientsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<List<Client>>> Create(Client client)
     {
+        if (client == null) return BadRequest("Data not correct");
         _dbContext.Clients.Add(client);
         await _dbContext.SaveChangesAsync();
         return CreatedAtAction(nameof(GetAll), new { id = client.Id }, client);
