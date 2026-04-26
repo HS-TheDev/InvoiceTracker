@@ -1,4 +1,4 @@
-using InvoiceTracker.API.Data;
+﻿using InvoiceTracker.API.Data;
 using InvoiceTracker.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +12,13 @@ public class ClientsController : ControllerBase
     private readonly AppDbContext _dbContext;
     public ClientsController(AppDbContext dbContext)
     {
-        _dbContext=dbContext;
+        _dbContext = dbContext;
     }
-
+   
     [HttpGet]
     public async Task<ActionResult<List<Client>>> GetAll()
     {
-        var clients= await _dbContext.Clients.ToListAsync();
+        var clients = await _dbContext.Clients.ToListAsync();
         return Ok(clients);
     }
 
@@ -34,7 +34,7 @@ public class ClientsController : ControllerBase
     public async Task<ActionResult<Client>> GetById(int Id)
     {
         var client = await _dbContext.Clients.FindAsync(Id);
-        if(client == null)
+        if (client == null)
         {
             return NotFound();
         }
@@ -45,7 +45,7 @@ public class ClientsController : ControllerBase
     public async Task<ActionResult> Delete(int Id)
     {
         var client = await _dbContext.Clients.FindAsync(Id);
-        if(client == null)
+        if (client == null)
         {
             return NotFound();
         }
@@ -68,3 +68,4 @@ public class ClientsController : ControllerBase
         return NoContent();
     }
 }
+

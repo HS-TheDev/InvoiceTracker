@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InvoiceTracker.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f324e6ac1642a8cf779a8da879442b30a6611b91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a25f1d5126d9dfa7f23817132c1c37900bc6c8b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("InvoiceTracker.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InvoiceTracker.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

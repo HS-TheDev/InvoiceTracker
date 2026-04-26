@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj": {}
+    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj": {}
   },
   "projects": {
-    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj": {
+    "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj",
+        "projectUniqueName": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj",
         "projectName": "InvoiceTracker.API",
-        "projectPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\InvoiceTracker.API.csproj",
+        "projectPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\InvoiceTracker.API.csproj",
         "packagesPath": "C:\\Users\\Syed Hussain Raza\\.nuget\\packages\\",
-        "outputPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.Api\\obj\\",
+        "outputPath": "D:\\Personal\\InvoiceTracker\\InvoiceTracker.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
