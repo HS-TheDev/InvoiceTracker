@@ -1,6 +1,19 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import ClientsPage from "./Pages/ClientsPage";
+import InvoicesPage from "./Pages/InvoicesPage";
 function App() {
-    return <ClientsPage />
+    return (
+        <BrowserRouter>
+         <nav className="bg-slate-800 text-white px-6 py-3 flex gap-6">
+                <Link to="/" className="hover:text-blue-400">Clients</Link>
+                <Link to="/invoices" className="hover:text-blue-400">Invoices</Link>
+            </nav>
+            <Routes>
+                <Route path='/' element={<ClientsPage />} />
+                <Route path='/invoices' element={<InvoicesPage />} />
+            </Routes>
+        </BrowserRouter>
+    )
     }
 
 export default App;

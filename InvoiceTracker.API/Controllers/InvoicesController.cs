@@ -50,7 +50,7 @@ public class InvoicesController(AppDbContext dbContext) : ControllerBase
         return Ok(invoice);
     }
 
-    [HttpGet]
+    [HttpGet("client/{clientId}")]
     public async Task<ActionResult<List<Invoice>>> GetByClientId(int clientId)
     {
         var invoices = await _dbContext.Invoices.Where(i => i.ClientId == clientId).ToListAsync();
