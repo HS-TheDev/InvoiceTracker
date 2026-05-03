@@ -3,36 +3,24 @@
   "WorkspaceRootPath": "D:\\Visual Studio Repos\\InvoiceTracker\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\models\\invoiceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\models\\invoiceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\controllers\\invoicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\controllers\\invoicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|d:\\visual studio repos\\invoicetracker\\invoicetracker.api\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AAABF53-F14C-CBE9-7ACE-0729F6BE5FFD}|InvoiceTracker.API\\InvoiceTracker.API.csproj|solutionrelative:invoicetracker.api\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,19 +50,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InvoiceItem.cs",
-              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\InvoiceItem.cs",
-              "RelativeDocumentMoniker": "InvoiceTracker.API\\Models\\InvoiceItem.cs",
-              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\InvoiceItem.cs",
-              "RelativeToolTip": "InvoiceTracker.API\\Models\\InvoiceItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "InvoiceTracker.API\\Controllers\\PaymentsController.cs",
+              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\PaymentsController.cs",
+              "RelativeToolTip": "InvoiceTracker.API\\Controllers\\PaymentsController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAUwEwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T09:08:38.96Z"
+              "WhenOpened": "2026-05-02T11:40:11.155Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Invoice.cs",
+              "RelativeDocumentMoniker": "InvoiceTracker.API\\Models\\Invoice.cs",
+              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Invoice.cs",
+              "RelativeToolTip": "InvoiceTracker.API\\Models\\Invoice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-02T11:39:27.693Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Payment.cs",
               "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Payment.cs",
               "RelativeDocumentMoniker": "InvoiceTracker.API\\Models\\Payment.cs",
@@ -82,80 +84,34 @@
               "RelativeToolTip": "InvoiceTracker.API\\Models\\Payment.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T09:08:27.818Z",
+              "WhenOpened": "2026-05-02T11:39:26.106Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Client.cs",
-              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Client.cs",
-              "RelativeDocumentMoniker": "InvoiceTracker.API\\Models\\Client.cs",
-              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Client.cs",
-              "RelativeToolTip": "InvoiceTracker.API\\Models\\Client.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T09:08:09.65Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Invoice.cs",
-              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Invoice.cs",
-              "RelativeDocumentMoniker": "InvoiceTracker.API\\Models\\Invoice.cs",
-              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Models\\Invoice.cs",
-              "RelativeToolTip": "InvoiceTracker.API\\Models\\Invoice.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T09:07:29.889Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "InvoicesController.cs",
               "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\InvoicesController.cs",
               "RelativeDocumentMoniker": "InvoiceTracker.API\\Controllers\\InvoicesController.cs",
               "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\InvoicesController.cs",
               "RelativeToolTip": "InvoiceTracker.API\\Controllers\\InvoicesController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwDUAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAwwCUAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T08:53:54.664Z"
+              "WhenOpened": "2026-05-02T11:38:19.028Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\appsettings.json",
-              "RelativeDocumentMoniker": "InvoiceTracker.API\\appsettings.json",
-              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\appsettings.json",
-              "RelativeToolTip": "InvoiceTracker.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-02T08:43:22.695Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ClientsController.cs",
-              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\ClientsController.cs",
-              "RelativeDocumentMoniker": "InvoiceTracker.API\\Controllers\\ClientsController.cs",
-              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Controllers\\ClientsController.cs",
-              "RelativeToolTip": "InvoiceTracker.API\\Controllers\\ClientsController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA1wB8AAABPAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "InvoiceService.cs",
+              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Services\\InvoiceService.cs",
+              "RelativeDocumentMoniker": "InvoiceTracker.API\\Services\\InvoiceService.cs",
+              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Services\\InvoiceService.cs",
+              "RelativeToolTip": "InvoiceTracker.API\\Services\\InvoiceService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAiwCsAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T08:53:10.543Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Program.cs",
-              "RelativeDocumentMoniker": "InvoiceTracker.API\\Program.cs",
-              "ToolTip": "D:\\Visual Studio Repos\\InvoiceTracker\\InvoiceTracker.API\\Program.cs",
-              "RelativeToolTip": "InvoiceTracker.API\\Program.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-26T08:12:33.474Z"
+              "WhenOpened": "2026-05-02T11:34:18.31Z",
+              "EditorCaption": ""
             }
           ]
         }

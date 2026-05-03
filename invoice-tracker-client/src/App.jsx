@@ -7,12 +7,21 @@ import DashboardPage from './pages/DashboardPage'
 function App() {
     return (
         <BrowserRouter>
-            <nav className="bg-slate-800 text-white px-6 py-3 flex gap-6">
-                <Link to="/" className="hover:text-blue-400">Dashboard</Link>
-                <Link to="/clients" className="hover:text-blue-400">Clients</Link>
-                <Link to="/invoices" className="hover:text-blue-400">Invoices</Link>
-                <Link to="/payments" className="hover:text-blue-400">Payments</Link>
+           <nav className="bg-blue-800 text-white px-6 py-5 flex justify-center items-center gap-8">
+                <Link to="/" className="transition-transform duration-200 hover:scale-125 px-3">
+                    Dashboard
+                </Link>
+                <Link to="/clients" className="transition-transform duration-200 hover:scale-125 px-3">
+                    Clients
+                </Link>
+                <Link to="/invoices" className="transition-transform duration-200 hover:scale-125  px-3">
+                    Invoices
+                </Link>
+                <Link to="/payments" className="transition-transform duration-200 hover:scale-125 px-3">
+                    Payments
+                </Link>
             </nav>
+
             <Routes>
                 <Route path="/"        element={<DashboardPage />} />
                 <Route path="/clients" element={<ClientsPage />} />

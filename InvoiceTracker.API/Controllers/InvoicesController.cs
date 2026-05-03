@@ -1,5 +1,6 @@
 ﻿using InvoiceTracker.API.Data;
 using InvoiceTracker.API.Models;
+using InvoiceTracker.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +8,10 @@ namespace InvoiceTracker.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class InvoicesController(AppDbContext dbContext) : ControllerBase
+public class InvoicesController(AppDbContext dbContext, InvoiceService invoiceService) : ControllerBase
 {
     private readonly AppDbContext _dbContext = dbContext;
+    private readonly InvoiceService _invoiceService = invoiceService;
 
     [HttpGet]
     public async Task<ActionResult<List<Invoice>>> GetAll()
@@ -21,6 +23,12 @@ public class InvoicesController(AppDbContext dbContext) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<List<Invoice>>> Create(Invoice invoice)
     {
+        invoice.InvoiceNumber = await _invoiceService.GenerateInvoiceNumber(invoice.ClientId);
+
+        if (await _invoiceService.alreadyExists(invoice.InvoiceNumber))
+        {
+            return BadRequest("Invoice with the same number already exists.");
+        }
         _dbContext.Invoices.Add(invoice);
         await _dbContext.SaveChangesAsync();
         return CreatedAtAction(nameof(GetAll), new { id = invoice.Id }, invoice);

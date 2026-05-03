@@ -2,14 +2,16 @@
 using InvoiceTracker.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using InvoiceTracker.API.Services;
 
 namespace InvoiceTracker.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PaymentsController(AppDbContext dbContext) : ControllerBase
+public class PaymentsController(AppDbContext dbContext, InvoiceService invoiceService) : ControllerBase
 {
    private readonly AppDbContext _dbContext = dbContext;
+   private readonly InvoiceService _invoiceService = invoiceService;
 
     [HttpGet]
     public async Task<ActionResult<List<Payment>>> GetAll()
@@ -19,8 +21,11 @@ public class PaymentsController(AppDbContext dbContext) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<List<Payment>>> Create(Payment payment)
+    public async Task<ActionResult<Payment>> Create(Payment payment)
     {
+        var error = await _invoiceService.ProcessPayment(payment);
+        if (error != null) { return BadRequest(error); }
+
         _dbContext.Payments.Add(payment);
         await _dbContext.SaveChangesAsync();
         return CreatedAtAction(nameof(GetAll), new { id = payment.Id }, payment);

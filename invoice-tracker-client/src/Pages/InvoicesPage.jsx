@@ -4,7 +4,6 @@ import api from '../Services/Api'
 function InvoicesPage() {
     const [invoices, setInvoices] = useState([])
     const [clients, setClients] = useState([])
-    const [invoiceNumber, setInvoiceNumber] = useState('INV-0001')
     const [issueDate, setIssueDate] = useState('')
     const [dueDate, setDueDate] = useState('')
     const [totalAmount, setTotalAmount] = useState(0)
@@ -29,17 +28,17 @@ function InvoicesPage() {
     }
 
     const handleSubmit = async () => {
-        if (!invoiceNumber || !issueDate || !dueDate || !totalAmount || !clientId)
+        if (!issueDate || !dueDate || !totalAmount || !clientId)
             return alert('Please fill all required fields')
 
         if (editingId) {
             await api.put(`/invoices/${editingId}`, {
-                id: editingId, invoiceNumber, issueDate, dueDate,
+                id: editingId, issueDate, dueDate,
                 totalAmount: Number(totalAmount), status, clientId
             })
         } else {
             await api.post('/invoices', {
-                invoiceNumber, issueDate, dueDate,
+                issueDate, dueDate,
                 totalAmount: Number(totalAmount), status, clientId
             })
         }
@@ -66,7 +65,6 @@ function InvoicesPage() {
     }
 
     const resetForm = () => {
-        setInvoiceNumber('INV-0001')
         setIssueDate('')
         setDueDate('')
         setTotalAmount(0)
@@ -135,15 +133,6 @@ function InvoicesPage() {
                             {editingId ? 'Edit Invoice' : 'New Invoice'}
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Invoice Number *</label>
-                                <input
-                                    value={invoiceNumber}
-                                    onChange={(e) => setInvoiceNumber(e.target.value)}
-                                    placeholder="INV-0001"
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-1">Client *</label>
                                 <select

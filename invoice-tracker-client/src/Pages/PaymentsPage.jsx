@@ -30,9 +30,10 @@ function PaymentsPage() {
     }
 
     const handleSubmit = async () => {
-        if (!amountPaid || !paymentDate || !paymentMethod || !invoiceId)
-            return alert('Please fill all required fields')
+    if (!amountPaid || !paymentDate || !paymentMethod || !invoiceId)
+        return alert('Please fill all required fields')
 
+    try {
         if (editingId) {
             await api.put(`/payments/${editingId}`, {
                 id: editingId, amountPaid: Number(amountPaid),
@@ -44,10 +45,12 @@ function PaymentsPage() {
                 paymentDate, paymentMethod, invoiceId
             })
         }
-
         await fetchPayments()
         resetForm()
+    } catch (error) {
+        alert(error.response?.data || 'Something went wrong')
     }
+}
 
     const handleEdit = (payment) => {
         setAmountPaid(payment.amountPaid)
