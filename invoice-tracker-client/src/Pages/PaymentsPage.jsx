@@ -1,261 +1,234 @@
-//https://github.com/nexu-io/open-design
-
-
 import { useState, useEffect } from 'react'
 import api from '../Services/Api'
 
-function PaymentsPage() {
-    const [payments, setPayments] = useState([])
-    const [invoices, setInvoices] = useState([])
-    const [amountPaid, setAmountPaid] = useState(0)
-    const [paymentDate, setPaymentDate] = useState('')
-    const [paymentMethod, setPaymentMethod] = useState('')
-    const [invoiceId, setInvoiceId] = useState(0)
-    const [showForm, setShowForm] = useState(false)
-    const [editingId, setEditingId] = useState(null)
+const PAYMENT_METHODS = ['Cash', 'Bank Transfer', 'Cheque', 'Online', 'Other']
 
-    useEffect(() => {
-        fetchPayments()
-        fetchInvoices()
-    }, [])
-
-    const fetchPayments = async () => {
-        const result = await api.get('/payments')
-        setPayments(result.data)
-    }
-
-    const fetchInvoices = async () => {
-        const result = await api.get('/invoices')
-        setInvoices(result.data)
-    }
-
-    const handleSubmit = async () => {
-    if (!amountPaid || !paymentDate || !paymentMethod || !invoiceId)
-        return alert('Please fill all required fields')
-
-    try {
-        if (editingId) {
-            await api.put(`/payments/${editingId}`, {
-                id: editingId, amountPaid: Number(amountPaid),
-                paymentDate, paymentMethod, invoiceId
-            })
-        } else {
-            await api.post('/payments', {
-                amountPaid: Number(amountPaid),
-                paymentDate, paymentMethod, invoiceId
-            })
-        }
-        await fetchPayments()
-        resetForm()
-    } catch (error) {
-        alert(error.response?.data || 'Something went wrong')
-    }
+function fmtDate(d) {
+  if (!d) return '—'
+  return new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 }
 
-    const handleEdit = (payment) => {
-        setAmountPaid(payment.amountPaid)
-        setPaymentDate(payment.paymentDate?.split('T')[0] || '')
-        setPaymentMethod(payment.paymentMethod)
-        setInvoiceId(payment.invoiceId)
-        setEditingId(payment.id)
-        setShowForm(true)
+function fmtMoney(n) {
+  return new Intl.NumberFormat('en-PK', { maximumFractionDigits: 0 }).format(n || 0)
+}
+
+function PaymentsPage() {
+  const [payments, setPayments] = useState([])
+  const [invoices, setInvoices] = useState([])
+  const [amountPaid, setAmountPaid] = useState('')
+  const [paymentDate, setPaymentDate] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState('')
+  const [invoiceId, setInvoiceId] = useState(0)
+  const [showForm, setShowForm] = useState(false)
+  const [editingId, setEditingId] = useState(null)
+
+  useEffect(() => { fetchPayments(); fetchInvoices() }, [])
+
+  const fetchPayments = async () => setPayments((await api.get('/payments')).data)
+  const fetchInvoices = async () => setInvoices((await api.get('/invoices')).data)
+
+  const handleSubmit = async () => {
+    if (!amountPaid || !paymentDate || !paymentMethod || !invoiceId)
+      return alert('Invoice, method, date and amount are all required.')
+    try {
+      const body = { amountPaid: Number(amountPaid), paymentDate, paymentMethod, invoiceId }
+      if (editingId) {
+        await api.put(`/payments/${editingId}`, { id: editingId, ...body })
+      } else {
+        await api.post('/payments', body)
+      }
+      await fetchPayments()
+      resetForm()
+    } catch (err) {
+      alert(err.response?.data || 'Something went wrong.')
     }
+  }
 
-    const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this payment?')) return
-        await api.delete(`/payments/${id}`)
-        await fetchPayments()
-    }
+  const handleEdit = (p) => {
+    setAmountPaid(p.amountPaid)
+    setPaymentDate(p.paymentDate?.split('T')[0] || '')
+    setPaymentMethod(p.paymentMethod)
+    setInvoiceId(p.invoiceId)
+    setEditingId(p.id)
+    setShowForm(true)
+  }
 
-    const resetForm = () => {
-        setAmountPaid(0)
-        setPaymentDate('')
-        setPaymentMethod('')
-        setInvoiceId(0)
-        setEditingId(null)
-        setShowForm(false)
-    }
+  const handleDelete = async (id) => {
+    if (!window.confirm('Strike this payment from the receipts?')) return
+    await api.delete(`/payments/${id}`)
+    await fetchPayments()
+  }
 
-    const getInvoiceNumber = (invoiceId) => {
-        const invoice = invoices.find(i => i.id === invoiceId)
-        return invoice ? invoice.invoiceNumber : '—'
-    }
+  const resetForm = () => {
+    setAmountPaid(''); setPaymentDate(''); setPaymentMethod(''); setInvoiceId(0)
+    setEditingId(null); setShowForm(false)
+  }
 
-    const formatDate = (dateString) => {
-        if (!dateString) return '—'
-        return new Date(dateString).toLocaleDateString('en-PK', {
-            year: 'numeric', month: 'short', day: 'numeric'
-        })
-    }
+  const invoiceNum = (id) => invoices.find((i) => i.id === id)?.invoiceNumber || '—'
+  const totalCollected = payments.reduce((s, p) => s + (p.amountPaid || 0), 0)
+  const methodCount = (m) => payments.filter((p) => p.paymentMethod === m).length
 
-    const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('en-PK', {
-            style: 'currency', currency: 'PKR', minimumFractionDigits: 0
-        }).format(amount)
-    }
-
-    const totalCollected = payments.reduce((sum, p) => sum + p.amountPaid, 0)
-
-    const PAYMENT_METHODS = ['Cash', 'Bank Transfer', 'Cheque', 'Online', 'Other']
-
-    return (
-        <div className="min-h-screen bg-slate-50">
-            {/* Header */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-                    <div>
-                        <h1 className="text-2xl font-bold text-slate-800">Payments</h1>
-                        <p className="text-sm text-slate-500 mt-1">{payments.length} total payments</p>
-                    </div>
-                    <button
-                        onClick={() => { resetForm(); setShowForm(!showForm) }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                    >
-                        {showForm ? 'Cancel' : '+ New Payment'}
-                    </button>
-                </div>
-            </div>
-
-            <div className="max-w-6xl mx-auto px-6 py-6">
-                {/* Form */}
-                {showForm && (
-                    <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
-                        <h2 className="text-lg font-semibold text-slate-800 mb-4">
-                            {editingId ? 'Edit Payment' : 'New Payment'}
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Invoice *</label>
-                                <select
-                                    value={invoiceId}
-                                    onChange={(e) => setInvoiceId(Number(e.target.value))}
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-                                >
-                                    <option value={0}>Select an invoice</option>
-                                    {invoices.map(i => (
-                                        <option key={i.id} value={i.id}>{i.invoiceNumber}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Payment Method *</label>
-                                <select
-                                    value={paymentMethod}
-                                    onChange={(e) => setPaymentMethod(e.target.value)}
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-                                >
-                                    <option value="">Select a method</option>
-                                    {PAYMENT_METHODS.map(m => (
-                                        <option key={m} value={m}>{m}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Payment Date *</label>
-                                <input
-                                    type="date"
-                                    value={paymentDate}
-                                    onChange={(e) => setPaymentDate(e.target.value)}
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Amount Paid (PKR) *</label>
-                                <input
-                                    type="number"
-                                    value={amountPaid}
-                                    onChange={(e) => setAmountPaid(e.target.value)}
-                                    placeholder="0"
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex gap-3 mt-5">
-                            <button
-                                type="button"
-                                onClick={handleSubmit}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
-                            >
-                                {editingId ? 'Update Payment' : 'Record Payment'}
-                            </button>
-                            <button
-                                type="button"
-                                onClick={resetForm}
-                                className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2 rounded-lg text-sm font-medium transition-colors"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {/* Summary Cards */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-white rounded-lg border border-slate-200 p-4">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total</p>
-                        <p className="text-xl font-bold text-slate-800 mt-1">{payments.length}</p>
-                    </div>
-                    <div className="bg-white rounded-lg border border-slate-200 p-4">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Collected</p>
-                        <p className="text-xl font-bold text-emerald-600 mt-1">{formatCurrency(totalCollected)}</p>
-                    </div>
-                    <div className="bg-white rounded-lg border border-slate-200 p-4">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Cash</p>
-                        <p className="text-xl font-bold text-slate-800 mt-1">{payments.filter(p => p.paymentMethod === 'Cash').length}</p>
-                    </div>
-                    <div className="bg-white rounded-lg border border-slate-200 p-4">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Bank Transfer</p>
-                        <p className="text-xl font-bold text-slate-800 mt-1">{payments.filter(p => p.paymentMethod === 'Bank Transfer').length}</p>
-                    </div>
-                </div>
-
-                {/* Table */}
-                {payments.length === 0 ? (
-                    <div className="bg-white rounded-lg border border-slate-200 p-12 text-center">
-                        <p className="text-slate-500">No payments yet. Record your first payment to get started.</p>
-                    </div>
-                ) : (
-                    <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="bg-slate-50 border-b border-slate-200">
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Invoice #</th>
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Payment Date</th>
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Method</th>
-                                    <th className="text-right px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Amount Paid</th>
-                                    <th className="text-right px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {payments.map((payment, index) => (
-                                    <tr key={payment.id} className={`border-b border-slate-100 hover:bg-slate-50 transition-colors ${index === payments.length - 1 ? 'border-b-0' : ''}`}>
-                                        <td className="px-6 py-4 text-sm font-medium text-slate-800">{getInvoiceNumber(payment.invoiceId)}</td>
-                                        <td className="px-6 py-4 text-sm text-slate-600">{formatDate(payment.paymentDate)}</td>
-                                        <td className="px-6 py-4 text-sm text-slate-600">{payment.paymentMethod}</td>
-                                        <td className="px-6 py-4 text-sm font-medium text-slate-800 text-right">{formatCurrency(payment.amountPaid)}</td>
-                                        <td className="px-6 py-4 text-right">
-                                            <button
-                                                onClick={() => handleEdit(payment)}
-                                                className="text-blue-600 hover:text-blue-800 text-sm font-medium mr-3"
-                                            >
-                                                Edit
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(payment.id)}
-                                                className="text-red-500 hover:text-red-700 text-sm font-medium"
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </div>
+  return (
+    <div>
+      {/* Section header */}
+      <div className="border-b border-ink">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-6 flex items-end justify-between gap-4">
+          <div>
+            <div className="smallcaps text-ink-muted">Section D  ·  Receipts &amp; remittances</div>
+            <h2 className="display-italic text-4xl md:text-5xl mt-1">
+              Payments<span className="text-vermillion">.</span>
+            </h2>
+            <p className="smallcaps text-ink-muted mt-2">{payments.length} receipts logged</p>
+          </div>
+          <button
+            onClick={() => { resetForm(); setShowForm(!showForm) }}
+            className={showForm ? 'btn btn-ghost' : 'btn'}
+          >
+            {showForm ? '✕ Dismiss' : '＋ Record a receipt'}
+          </button>
         </div>
-    )
+      </div>
+
+      {/* Hero collected */}
+      <section className="border-b border-ink bg-paper-deep/40">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-10 grid grid-cols-12 gap-6 lg:gap-10 items-end">
+          <div className="col-span-12 lg:col-span-7 rise">
+            <div className="smallcaps text-ink-muted mb-2">Sum total of monies received  ·  PKR</div>
+            <div className="display font-black text-[14vw] lg:text-[8rem] tab text-moss break-all">
+              {fmtMoney(totalCollected)}
+            </div>
+          </div>
+          <div className="col-span-12 lg:col-span-5 grid grid-cols-3 gap-px bg-ink rise" style={{ animationDelay: '0.15s' }}>
+            {PAYMENT_METHODS.slice(0, 3).map((m) => (
+              <div key={m} className="bg-paper p-4">
+                <div className="smallcaps text-ink-muted">{m}</div>
+                <div className="font-display text-3xl tab mt-1">
+                  {String(methodCount(m)).padStart(2, '0')}
+                </div>
+              </div>
+            ))}
+            <div className="col-span-3 bg-paper p-4 border-t border-ink">
+              <div className="flex justify-between smallcaps text-ink-muted">
+                <span>Other methods</span>
+                <span className="text-ink">
+                  {methodCount('Online') + methodCount('Other')}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Form drawer */}
+      {showForm && (
+        <section className="border-b border-ink bg-paper-deep/40 drop">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-8 grid grid-cols-12 gap-6 lg:gap-10">
+            <div className="col-span-12 lg:col-span-3">
+              <div className="smallcaps text-ink-muted">Form 1 / D</div>
+              <h3 className="display-italic text-3xl mt-1">
+                {editingId ? 'Amend receipt.' : 'Log receipt.'}
+              </h3>
+              <p className="smallcaps text-ink-muted mt-3 leading-relaxed">
+                Tied to a specific invoice. Method records the channel of remittance.
+              </p>
+            </div>
+
+            <div className="col-span-12 lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+              <Field label="Against invoice" required>
+                <select value={invoiceId} onChange={(e) => setInvoiceId(Number(e.target.value))}>
+                  <option value={0}>— Choose —</option>
+                  {invoices.map((i) => <option key={i.id} value={i.id}>{i.invoiceNumber}</option>)}
+                </select>
+              </Field>
+              <Field label="Method" required>
+                <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                  <option value="">— Choose —</option>
+                  {PAYMENT_METHODS.map((m) => <option key={m} value={m}>{m}</option>)}
+                </select>
+              </Field>
+              <Field label="Received on" required>
+                <input type="date" value={paymentDate} onChange={(e) => setPaymentDate(e.target.value)} />
+              </Field>
+              <Field label="Amount, PKR" required>
+                <input type="number" value={amountPaid} onChange={(e) => setAmountPaid(e.target.value)} placeholder="0" />
+              </Field>
+
+              <div className="md:col-span-2 flex flex-wrap gap-3 pt-4">
+                <button onClick={handleSubmit} className="btn">
+                  {editingId ? '✓ Save amendment' : '✓ Log receipt'}
+                </button>
+                <button onClick={resetForm} className="btn btn-ghost">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Receipt log */}
+      <section>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-10">
+          {payments.length === 0 ? (
+            <Empty text="No receipts on the desk yet — log the first one above." />
+          ) : (
+            <div className="border-t-2 border-ink">
+              <div className="hidden md:grid grid-cols-12 gap-3 py-2 border-b border-ink smallcaps text-ink-muted">
+                <div className="col-span-1">№</div>
+                <div className="col-span-3">Against</div>
+                <div className="col-span-3">Received</div>
+                <div className="col-span-2">Method</div>
+                <div className="col-span-2 text-right">Amount</div>
+                <div className="col-span-1 text-right">—</div>
+              </div>
+
+              {payments.map((p, i) => (
+                <article
+                  key={p.id}
+                  className="grid grid-cols-12 gap-3 py-4 border-b border-rule-soft hover:bg-paper-deep/60 transition-colors rise"
+                  style={{ animationDelay: `${i * 0.03}s` }}
+                >
+                  <div className="col-span-2 md:col-span-1 smallcaps text-ink-muted self-center">
+                    {String(i + 1).padStart(3, '0')}
+                  </div>
+                  <div className="col-span-10 md:col-span-3 self-center">
+                    <div className="font-display text-xl tab">{invoiceNum(p.invoiceId)}</div>
+                  </div>
+                  <div className="col-span-6 md:col-span-3 self-center tab text-sm">{fmtDate(p.paymentDate)}</div>
+                  <div className="col-span-6 md:col-span-2 self-center smallcaps text-ink-2">{p.paymentMethod}</div>
+                  <div className="col-span-6 md:col-span-2 self-center text-right">
+                    <span className="font-display text-xl tab text-moss">{fmtMoney(p.amountPaid)}</span>
+                    <span className="smallcaps text-ink-muted ml-1">PKR</span>
+                  </div>
+                  <div className="col-span-6 md:col-span-1 self-center md:text-right space-x-3">
+                    <button onClick={() => handleEdit(p)}     className="action-link text-ink">Edit</button>
+                    <button onClick={() => handleDelete(p.id)} className="action-link text-vermillion">Strike</button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function Field({ label, required, children }) {
+  return (
+    <label className="field block">
+      <div className="smallcaps text-ink-muted mb-1">
+        {label} {required && <span className="text-vermillion">*</span>}
+      </div>
+      {children}
+    </label>
+  )
+}
+
+function Empty({ text }) {
+  return (
+    <div className="border border-rule-soft border-dashed py-20 text-center smallcaps text-ink-muted">
+      ◇  {text}
+    </div>
+  )
 }
 
 export default PaymentsPage

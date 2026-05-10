@@ -1,191 +1,175 @@
 import { useState, useEffect } from 'react'
-import api from '../services/api'
+import api from '../Services/Api'
 
 function ClientsPage() {
-    const [clients, setClients] = useState([])
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [address, setAddress] = useState('')
-    const [showForm, setShowForm] = useState(false)
-    const [editingId, setEditingId] = useState(null)
+  const [clients, setClients] = useState([])
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [address, setAddress] = useState('')
+  const [showForm, setShowForm] = useState(false)
+  const [editingId, setEditingId] = useState(null)
 
-    useEffect(() => {
-        fetchClients()
-    }, [])
+  useEffect(() => { fetchClients() }, [])
 
-    const fetchClients = async () => {
-        const result = await api.get('/clients')
-        setClients(result.data)
+  const fetchClients = async () => {
+    const r = await api.get('/clients')
+    setClients(r.data)
+  }
+
+  const handleSubmit = async () => {
+    if (!name || !email || !phone) return alert('Name, email and phone are required.')
+    if (editingId) {
+      await api.put(`/clients/${editingId}`, { id: editingId, name, email, phone, address })
+    } else {
+      await api.post('/clients', { name, email, phone, address })
     }
+    await fetchClients()
+    resetForm()
+  }
 
-    const handleSubmit = async () => {
-        if (!name || !email || !phone) return
+  const handleEdit = (c) => {
+    setName(c.name); setEmail(c.email); setPhone(c.phone); setAddress(c.address || '')
+    setEditingId(c.id); setShowForm(true)
+  }
 
-        if (editingId) {
-            await api.put(`/clients/${editingId}`, { id: editingId, name, email, phone, address })
-        } else {
-            await api.post('/clients', { name, email, phone, address })
-        }
+  const handleDelete = async (id) => {
+    if (!window.confirm('Strike this client from the register?')) return
+    await api.delete(`/clients/${id}`)
+    await fetchClients()
+  }
 
-        await fetchClients()
-        resetForm()
-    }
+  const resetForm = () => {
+    setName(''); setEmail(''); setPhone(''); setAddress('')
+    setEditingId(null); setShowForm(false)
+  }
 
-    const handleEdit = (client) => {
-        setName(client.name)
-        setEmail(client.email)
-        setPhone(client.phone)
-        setAddress(client.address)
-        setEditingId(client.id)
-        setShowForm(true)
-    }
-
-    const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this client?')) return
-        await api.delete(`/clients/${id}`)
-        await fetchClients()
-    }
-
-    const resetForm = () => {
-        setName('')
-        setEmail('')
-        setPhone('')
-        setAddress('')
-        setEditingId(null)
-        setShowForm(false)
-    }
-
-    return (
-        <div className="min-h-screen bg-slate-50">
-            {/* Header */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
-                    <div>
-                        <h1 className="text-2xl font-bold text-slate-800">Clients</h1>
-                        <p className="text-sm text-slate-500 mt-1">{clients.length} total clients</p>
-                    </div>
-                    <button
-                        onClick={() => { resetForm(); setShowForm(!showForm) }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                    >
-                        {showForm ? 'Cancel' : '+ Add Client'}
-                    </button>
-                </div>
-            </div>
-
-            <div className="max-w-5xl mx-auto px-6 py-6">
-                {/* Form */}
-                {showForm && (
-                    <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
-                        <h2 className="text-lg font-semibold text-slate-800 mb-4">
-                            {editingId ? 'Edit Client' : 'New Client'}
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
-                                <input
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="Enter client name"
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter email address"
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Phone *</label>
-                                <input
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    placeholder="Enter phone number"
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Address</label>
-                                <input
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    placeholder="Enter address"
-                                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex gap-3 mt-5">
-                            <button
-                                type="button"
-                                onClick={handleSubmit}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
-                            >
-                                {editingId ? 'Update Client' : 'Add Client'}
-                            </button>
-                            <button
-                                type="button"
-                                onClick={resetForm}
-                                className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2 rounded-lg text-sm font-medium transition-colors"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {/* Clients Table */}
-                {clients.length === 0 ? (
-                    <div className="bg-white rounded-lg border border-slate-200 p-12 text-center">
-                        <p className="text-slate-500">No clients yet. Add your first client to get started.</p>
-                    </div>
-                ) : (
-                    <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="bg-slate-50 border-b border-slate-200">
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Name</th>
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Email</th>
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Phone</th>
-                                    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Address</th>
-                                    <th className="text-right px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {clients.map((client, index) => (
-                                    <tr key={client.id} className={`border-b border-slate-100 hover:bg-slate-50 transition-colors ${index === clients.length - 1 ? 'border-b-0' : ''}`}>
-                                        <td className="px-6 py-4 text-sm font-medium text-slate-800">{client.name}</td>
-                                        <td className="px-6 py-4 text-sm text-slate-600">{client.email}</td>
-                                        <td className="px-6 py-4 text-sm text-slate-600">{client.phone}</td>
-                                        <td className="px-6 py-4 text-sm text-slate-600">{client.address || '—'}</td>
-                                        <td className="px-6 py-4 text-right">
-                                            <button
-                                                onClick={() => handleEdit(client)}
-                                                className="text-blue-600 hover:text-blue-800 text-sm font-medium mr-3"
-                                            >
-                                                Edit
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(client.id)}
-                                                className="text-red-500 hover:text-red-700 text-sm font-medium"
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </div>
+  return (
+    <div>
+      {/* Section header */}
+      <div className="border-b border-ink">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-6 flex items-end justify-between gap-4">
+          <div>
+            <div className="smallcaps text-ink-muted">Section B  ·  The Register</div>
+            <h2 className="display-italic text-4xl md:text-5xl mt-1">
+              Clients<span className="text-vermillion">.</span>
+            </h2>
+            <p className="smallcaps text-ink-muted mt-2">
+              {clients.length} {clients.length === 1 ? 'name' : 'names'} on the books
+            </p>
+          </div>
+          <button
+            onClick={() => { resetForm(); setShowForm(!showForm) }}
+            className={showForm ? 'btn btn-ghost' : 'btn'}
+          >
+            {showForm ? '✕ Dismiss' : '＋ Enter a client'}
+          </button>
         </div>
-    )
+      </div>
+
+      {/* Form drawer */}
+      {showForm && (
+        <section className="border-b border-ink bg-paper-deep/40 drop">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-8 grid grid-cols-12 gap-6 lg:gap-10">
+            <div className="col-span-12 lg:col-span-3">
+              <div className="smallcaps text-ink-muted">Form 1 / B</div>
+              <h3 className="display-italic text-3xl mt-1">
+                {editingId ? 'Amend record.' : 'New entry.'}
+              </h3>
+              <p className="smallcaps text-ink-muted mt-3 leading-relaxed">
+                Particulars to be entered in full. Telephone in international format where possible.
+              </p>
+            </div>
+
+            <div className="col-span-12 lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+              <Field label="Full name" required>
+                <input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Ayesha Khan" />
+              </Field>
+              <Field label="Electronic mail" required>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@firm.pk" />
+              </Field>
+              <Field label="Telephone" required>
+                <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+92 ___ _______" />
+              </Field>
+              <Field label="Postal address">
+                <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street, city" />
+              </Field>
+
+              <div className="md:col-span-2 flex flex-wrap gap-3 pt-4">
+                <button onClick={handleSubmit} className="btn">
+                  {editingId ? '✓ Save amendment' : '✓ File client'}
+                </button>
+                <button onClick={resetForm} className="btn btn-ghost">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Table — editorial */}
+      <section>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-10">
+          {clients.length === 0 ? (
+            <Empty text="The register stands empty. File the first client above." />
+          ) : (
+            <div className="border-t-2 border-ink">
+              <div className="hidden md:grid grid-cols-12 gap-3 py-2 border-b border-ink smallcaps text-ink-muted">
+                <div className="col-span-1">№</div>
+                <div className="col-span-3">Name</div>
+                <div className="col-span-3">Mail</div>
+                <div className="col-span-2">Telephone</div>
+                <div className="col-span-2">Address</div>
+                <div className="col-span-1 text-right">—</div>
+              </div>
+
+              {clients.map((c, i) => (
+                <article
+                  key={c.id}
+                  className="grid grid-cols-12 gap-3 py-4 border-b border-rule-soft hover:bg-paper-deep/60 transition-colors rise"
+                  style={{ animationDelay: `${i * 0.04}s` }}
+                >
+                  <div className="col-span-2 md:col-span-1 smallcaps text-ink-muted self-center">
+                    {String(i + 1).padStart(3, '0')}
+                  </div>
+                  <div className="col-span-10 md:col-span-3 self-center">
+                    <div className="font-display text-xl">{c.name}</div>
+                  </div>
+                  <div className="col-span-12 md:col-span-3 self-center tab text-sm text-ink-2">{c.email}</div>
+                  <div className="col-span-6 md:col-span-2 self-center tab text-sm text-ink-2">{c.phone}</div>
+                  <div className="col-span-6 md:col-span-2 self-center text-sm text-ink-muted italic">
+                    {c.address || '—'}
+                  </div>
+                  <div className="col-span-12 md:col-span-1 self-center md:text-right space-x-3">
+                    <button onClick={() => handleEdit(c)}    className="action-link text-ink">Edit</button>
+                    <button onClick={() => handleDelete(c.id)} className="action-link text-vermillion">Strike</button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function Field({ label, required, children }) {
+  return (
+    <label className="field block">
+      <div className="smallcaps text-ink-muted mb-1">
+        {label} {required && <span className="text-vermillion">*</span>}
+      </div>
+      {children}
+    </label>
+  )
+}
+
+function Empty({ text }) {
+  return (
+    <div className="border border-rule-soft border-dashed py-20 text-center smallcaps text-ink-muted">
+      ◇  {text}
+    </div>
+  )
 }
 
 export default ClientsPage
